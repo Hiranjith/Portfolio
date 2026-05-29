@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Premium scrollbar utilities */
+@utility scrollbar-thin {
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-slate-200);
+    border-radius: 9999px;
+  }
+  .dark &::-webkit-scrollbar-thumb {
+    background: var(--color-slate-800);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-violet-500);
+  }
+  .dark &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-emerald-500);
+  }
+}
+
+@utility scrollbar-none {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

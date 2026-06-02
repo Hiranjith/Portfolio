@@ -10,7 +10,7 @@ import loginRoutes from './routes/loginRoutes.js'
 
 
 dotenv.config()
-const port = process.env.port || 5000
+const port = process.env.PORT || process.env.port || 5000
 
 
 const app = express()

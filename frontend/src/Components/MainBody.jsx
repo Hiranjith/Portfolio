@@ -147,11 +147,11 @@ function MainBody() {
               {projects.slice(0, 3).map((project) => (
                 <div 
                   key={project._id}
-                  className="min-w-full lg:min-w-0 shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:h-[280px] transition-all duration-300"
+                  className="w-full max-w-full lg:w-auto lg:max-w-none shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:h-[280px] transition-all duration-300"
                 >
                   
                   {/* --- MOBILE CARD DESIGN --- */}
-                  <div className="lg:hidden flex flex-col justify-between h-full bg-[#061210] border border-[#142A22] rounded-[16px] p-[16px] hover:border-[#00D9A5]/30 transition-all duration-300">
+                  <div className="w-full overflow-hidden lg:hidden flex flex-col justify-between h-full bg-[#061210] border border-[#142A22] rounded-[16px] p-[16px] hover:border-[#00D9A5]/30 transition-all duration-300">
                     <div className="flex flex-col gap-[12px]">
                       
                       {/* Logo and Title+Desc */}

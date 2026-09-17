@@ -34,7 +34,7 @@ function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="h-[32px] w-[32px] md:h-[40px] md:w-[40px] flex items-center justify-center">
-            <img src="/logos/Hiranjith%20Logo.png" alt="Hiranjith Logo" className="h-full w-full object-contain" />
+            <img src="/Logos/Hiranjith%20Logo.png" alt="Hiranjith Logo" className="h-full w-full object-contain" />
           </div>
           <span className="text-[15px] font-[700] text-[#F5F7FA]">Hiranjith E M</span>
         </Link>

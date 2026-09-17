@@ -22,16 +22,16 @@ function Banner() {
         
         {/* Buttons */}
         <div className="flex flex-row items-center justify-start gap-[12px] md:gap-[16px] w-full">
-          <button className="flex-1 md:flex-none justify-center bg-[#00D9A5] text-[#050A14] px-[16px] md:px-[24px] py-[12px] rounded-xl font-[600] flex items-center gap-2 hover:bg-[#00B98D] transition-colors">
+          <button className="flex-1 md:flex-none justify-center bg-[#00D9A5] text-[#050A14] px-[14px] md:px-[20px] py-[10px] rounded-xl font-[600] text-[14px] flex items-center gap-2 hover:bg-[#00B98D] transition-colors">
             View My Work <FiArrowRight size={16} />
           </button>
-          <button className="flex-1 md:flex-none justify-center border border-[#18283D] text-[#A0B3C6] px-[16px] md:px-[24px] py-[12px] rounded-xl font-[600] hover:bg-[#18283D] transition-colors">
+          <button className="flex-1 md:flex-none justify-center border border-[#18283D] text-[#A0B3C6] px-[14px] md:px-[20px] py-[10px] rounded-xl font-[600] text-[14px] hover:bg-[#18283D] transition-colors">
             Contact Me
           </button>
         </div>
 
-        {/* Socials */}
-        <div className="flex flex-row items-center justify-start gap-[16px]">
+        {/* Socials (Desktop Only) */}
+        <div className="hidden md:flex flex-row items-center justify-start gap-[16px]">
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
             <FaLinkedinIn size={18} />
           </a>

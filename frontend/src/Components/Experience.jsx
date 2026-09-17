@@ -1,57 +1,92 @@
 import React from 'react'
 import { MdOutlineWork } from 'react-icons/md'
 import { FiArrowRight } from 'react-icons/fi'
+import { IoLocationOutline } from 'react-icons/io5'
 
 function Experience() {
   const experiences = [
     {
       id: 1,
-      duration: '2022 - 2025',
+      durationStart: '2022',
+      durationEnd: '2025',
       role: 'Software Engineer',
-      company: 'Servion Global Solutions – Bengaluru, India',
-      description: 'Working on real-world projects using the React. Collaborating with the team to build scalable web applications.'
+      company: 'Servion Global Solutions',
+      location: 'Bengaluru, India',
+      description: 'Worked on real-world projects using React. Collaborated with the team to build scalable web applications.',
+      skills: ['React', 'Node.js', 'MongoDB', 'Express', 'AWS']
     }
   ]
 
   return (
-    <section id="experience" className="hidden md:block space-y-[24px]">
+    <section id="experience" className="space-y-[24px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-[32px] h-[32px] bg-[#00B98B] rounded-[7px] flex items-center justify-center text-[#050A14]">
+          <div className="w-[32px] h-[32px] bg-[#00D9A5] rounded-[7px] flex items-center justify-center text-[#050A14]">
             <MdOutlineWork size={16} />
           </div>
-          <h2 className="text-[22px] font-[750] text-[#F5F7FA] tracking-tight">Experience</h2>
+          <h2 className="text-[20px] lg:text-[22px] font-[750] text-[#F5F7FA] tracking-tight flex items-center gap-2">
+            Experience <div className="w-[6px] h-[6px] bg-[#00D9A5] rounded-full mt-1"></div>
+          </h2>
         </div>
-        <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[14px] hover:text-[#00B98B] transition-colors">
-          <span>View All Experience</span>
+        <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+          <span className="hidden lg:inline">View All Experience</span>
+          <span className="lg:hidden">View All</span>
           <FiArrowRight />
         </button>
       </div>
+
+      <p className="text-[14px] lg:text-[15px] text-[#8FA7C4]">
+        My professional journey and key roles.
+      </p>
       
-      <div className="space-y-0 pl-2">
+      <div className="space-y-0 pt-4">
         {experiences.map((exp, index) => (
-          <div key={exp.id} className="flex gap-[32px]">
-            <div className="w-[120px] shrink-0 text-[#8FA7C4] text-[14px] font-[600] pt-1">
-              {exp.duration}
+          <div key={exp.id} className="flex gap-[16px] lg:gap-[32px]">
+            {/* Left side (Years) */}
+            <div className="w-[45px] lg:w-[80px] shrink-0 text-[#8FA7C4] text-[13px] lg:text-[14px] font-[500] pt-1 leading-tight lg:leading-normal">
+              <span className="block lg:inline">{exp.durationStart} - </span>
+              <span className="block lg:inline">{exp.durationEnd}</span>
             </div>
 
+            {/* Middle Timeline */}
             <div className="relative flex flex-col items-center">
-              <div className="w-[16px] h-[16px] rounded-full border-4 border-[#050A14] bg-[#00D9A5] z-10 shadow-[0_0_0_4px_rgba(0,217,165,0.1)]"></div>
-              {index !== experiences.length - 1 && (
-                <div className="w-[2px] flex-grow bg-[#18283D] my-2 min-h-[80px]"></div>
-              )}
+              <div className="w-[14px] h-[14px] rounded-full border-4 border-[#050A14] bg-[#00D9A5] z-10 mt-[6px]"></div>
+              {/* Only show line if not the last item, or show it fading out. Assuming we want it to extend down to the card height */}
+              <div className="w-[2px] flex-grow bg-gradient-to-b from-[#00D9A5]/50 to-transparent my-1 min-h-[200px]"></div>
             </div>
 
+            {/* Right Card */}
             <div className="flex-1 pb-[32px]">
-              <h3 className="text-[18px] font-[700] text-[#F5F7FA] leading-snug">
-                {exp.role}
-              </h3>
-              <p className="text-[14px] font-[600] text-[#00D9A5] mt-[4px]">
-                {exp.company}
-              </p>
-              <p className="text-[14px] text-[#8FA7C4] mt-[12px] leading-relaxed max-w-[800px]">
-                {exp.description}
-              </p>
+              <div className="bg-transparent border border-[#18283D] p-[16px] lg:p-[24px] rounded-[16px]">
+                <h3 className="text-[16px] lg:text-[18px] font-[700] text-[#F5F7FA] leading-snug">
+                  {exp.role}
+                </h3>
+                <p className="text-[14px] lg:text-[15px] font-[500] text-[#8FA7C4] mt-[4px]">
+                  {exp.company}
+                </p>
+                
+                <div className="flex items-center gap-[6px] text-[#8FA7C4] mt-[8px]">
+                  <IoLocationOutline size={16} />
+                  <span className="text-[13px]">{exp.location}</span>
+                </div>
+
+                <p className="text-[14px] text-[#8FA7C4] mt-[16px] leading-relaxed">
+                  {exp.description}
+                </p>
+
+                {exp.skills && exp.skills.length > 0 && (
+                  <div className="flex flex-wrap gap-[8px] mt-[20px]">
+                    {exp.skills.map((skill, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-[12px] py-[6px] text-[12px] font-[500] rounded-[6px] bg-[#00D9A5]/10 text-[#00D9A5] border border-[#00D9A5]/20"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}

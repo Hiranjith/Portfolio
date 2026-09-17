@@ -11,31 +11,6 @@ function MainBody() {
   const [projects, setProjects] = useState([])
   const [loadingSkills, setLoadingSkills] = useState(true)
   const [loadingProjects, setLoadingProjects] = useState(true)
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0)
-
-  const handleProjectScroll = (e) => {
-    if (!e.target) return
-    const scrollLeft = e.target.scrollLeft
-    const width = e.target.offsetWidth
-    const newIndex = Math.round(scrollLeft / width)
-    if (newIndex !== activeProjectIndex) {
-      setActiveProjectIndex(newIndex)
-    }
-  }
-
-  const scrollToProject = (index) => {
-    const container = document.getElementById('projects-scroll-container')
-    if (container) {
-      const width = container.offsetWidth
-      // In CSS, gap is 24px, but the item takes full width. 
-      // Scrolling by width + gap ensures it snaps to the exact position
-      container.scrollTo({
-        left: index * (width + 24),
-        behavior: 'smooth'
-      })
-      setActiveProjectIndex(index)
-    }
-  }
 
   useEffect(() => {
     const fetchSkills = async () => {
@@ -92,8 +67,9 @@ function MainBody() {
             </div>
             <h2 className="text-[20px] lg:text-[22px] font-[750] text-[#F5F7FA] tracking-tight">Skills</h2>
           </div>
-          <button className="hidden lg:flex items-center gap-2 text-[#00D9A5] font-semibold text-[14px] hover:text-[#00B98B] transition-colors">
-            <span>View All Skills</span>
+          <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+            <span className="hidden lg:inline">View All Skills</span>
+            <span className="lg:hidden">View All</span>
             <FiArrowRight />
           </button>
         </div>
@@ -147,8 +123,9 @@ function MainBody() {
             </div>
             <h2 className="text-[20px] lg:text-[22px] font-[750] text-[#F5F7FA] tracking-tight">Projects</h2>
           </div>
-          <button className="hidden lg:flex items-center gap-2 text-[#00D9A5] font-semibold text-[14px] hover:text-[#00B98B] transition-colors">
-            <span>View All Projects</span>
+          <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+            <span className="hidden lg:inline">View All Projects</span>
+            <span className="lg:hidden">View All</span>
             <FiArrowRight />
           </button>
         </div>
@@ -166,15 +143,11 @@ function MainBody() {
         ) : (
           <div className="relative">
             {/* Horizontal scroll container for mobile, grid for desktop */}
-            <div 
-              id="projects-scroll-container"
-              className="flex lg:grid lg:grid-cols-3 gap-[24px] overflow-x-auto lg:overflow-visible snap-x snap-mandatory scrollbar-none pb-4 lg:pb-0"
-              onScroll={handleProjectScroll}
-            >
+            <div className="flex lg:grid lg:grid-cols-3 gap-[24px] overflow-x-auto lg:overflow-visible snap-x snap-mandatory scrollbar-none pb-4 lg:pb-0">
               {projects.slice(0, 3).map((project) => (
                 <div 
                   key={project._id}
-                  className="w-full lg:w-auto shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:h-[280px] transition-all duration-300 overflow-hidden"
+                  className="min-w-full lg:min-w-0 shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:h-[280px] transition-all duration-300"
                 >
                   
                   {/* --- MOBILE CARD DESIGN --- */}
@@ -298,15 +271,9 @@ function MainBody() {
             
             {/* Mobile Pagination Dots */}
             <div className="lg:hidden flex justify-center items-center gap-[6px] mt-[12px]">
-              {projects.slice(0, 3).map((_, idx) => (
-                <div 
-                  key={idx}
-                  onClick={() => scrollToProject(idx)}
-                  className={`h-[6px] rounded-full transition-all duration-300 cursor-pointer ${
-                    activeProjectIndex === idx ? 'w-[16px] bg-[#00D9A5]' : 'w-[6px] bg-[#18283D]'
-                  }`}
-                ></div>
-              ))}
+              <div className="w-[16px] h-[6px] rounded-full bg-[#00D9A5]"></div>
+              <div className="w-[6px] h-[6px] rounded-full bg-[#18283D]"></div>
+              <div className="w-[6px] h-[6px] rounded-full bg-[#18283D]"></div>
             </div>
           </div>
         )}

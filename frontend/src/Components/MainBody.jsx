@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FaUserAlt, FaFolder, FaGithub } from 'react-icons/fa'
+import { FiArrowRight } from 'react-icons/fi'
+import { SiReact, SiNodedotjs, SiMongodb, SiJavascript, SiTailwindcss } from 'react-icons/si'
 import Experience from './Experience'
 import Contact from './Contact'
 
@@ -8,7 +11,6 @@ function MainBody() {
   const [projects, setProjects] = useState([])
   const [loadingSkills, setLoadingSkills] = useState(true)
   const [loadingProjects, setLoadingProjects] = useState(true)
-  const [showAllProjects, setShowAllProjects] = useState(false)
 
   useEffect(() => {
     const fetchSkills = async () => {
@@ -50,101 +52,132 @@ function MainBody() {
     fetchProjects()
   }, [])
 
-
+  // Hardcoded icons or logic for specific skills could go here if needed
+  // Assuming the DB returns the skill name and optionally logo
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-[48px] lg:space-y-[80px]">
       
-      <section className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-violet-600 dark:bg-emerald-500 flex items-center justify-center text-white shadow-sm transition-colors duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4.5 h-4.5">
-              <path fillRule="evenodd" d="M12.516 2.185a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.75.75 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.97a.75.75 0 0 0-.722-.515 11.209 11.209 0 0 1-7.877-3.08Z" clipRule="evenodd" />
-            </svg>
+      {/* Skills Section */}
+      <section id="skills" className="space-y-[24px]">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-[32px] h-[32px] bg-[#00D9A5] rounded-[7px] flex items-center justify-center text-[#050A14]">
+              <FaUserAlt size={16} />
+            </div>
+            <h2 className="text-[20px] lg:text-[22px] font-[750] text-[#F5F7FA] tracking-tight">Skills</h2>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Skills</h2>
+          <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+            <span className="hidden lg:inline">View All Skills</span>
+            <span className="lg:hidden">View All</span>
+            <FiArrowRight />
+          </button>
         </div>
 
         {loadingSkills ? (
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 animate-pulse">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-              <div key={n} className="h-12 bg-slate-100 dark:bg-[#0b1329]/50 rounded-xl border border-slate-200/40 dark:border-slate-800/40"></div>
+          <div className="grid grid-cols-2 lg:grid-cols-6 gap-[16px] animate-pulse">
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <div key={n} className="h-[64px] bg-[#09111F] rounded-[12px] border border-[#18283D]"></div>
             ))}
           </div>
         ) : skills.length === 0 ? (
-          <div className="py-8 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400 dark:text-slate-500">No skills added yet.</p>
+          <div className="py-8 text-center border border-dashed border-[#18283D] rounded-xl">
+            <p className="text-sm text-[#8FA7C4]">No skills added yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
-            {skills.map((skillItem) => (
-              <div 
-                key={skillItem._id}
-                className="bg-white dark:bg-[#0b1329]/50 border border-slate-200/60 dark:border-slate-800/60 py-3.5 px-4 rounded-xl flex items-center justify-center font-semibold text-slate-700 dark:text-slate-200 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] hover:shadow-md hover:border-violet-500/30 dark:hover:border-emerald-500/30 transition-all duration-300"
-              >
-                <span className="text-sm text-center tracking-wide">{skillItem.skill}</span>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 lg:grid-cols-6 gap-[12px] lg:gap-[16px]">
+            {skills.slice(0, 6).map((skillItem) => {
+              const skillName = skillItem.skill.toLowerCase()
+              let Icon = <span className="font-mono text-[#00D9A5]">{'{}'}</span>
+              if (skillName.includes('react')) Icon = <SiReact className="text-[#00D9A5] text-[18px]" />
+              else if (skillName.includes('node')) Icon = <SiNodedotjs className="text-[#00D9A5] text-[18px]" />
+              else if (skillName.includes('express')) Icon = <span className="text-[#A0B3C6] font-[500] text-[16px] leading-none">ex</span>
+              else if (skillName.includes('mongo')) Icon = <SiMongodb className="text-[#00D9A5] text-[18px]" />
+              else if (skillName.includes('java') || skillName.includes('js')) Icon = <SiJavascript className="text-[#FFD700] text-[16px]" />
+              else if (skillName.includes('tailwind')) Icon = <SiTailwindcss className="text-[#47bfff] text-[18px]" />
+
+              return (
+                <div 
+                  key={skillItem._id}
+                  className="bg-transparent lg:bg-[#09111F] border border-[#18283D] h-[48px] lg:h-[64px] px-[12px] lg:px-[16px] rounded-[10px] lg:rounded-[12px] flex items-center justify-start lg:justify-center gap-[10px] lg:gap-3 hover:border-[#00D9A5]/50 transition-all duration-300"
+                >
+                  <div className="flex items-center justify-center w-[24px]">
+                    {Icon}
+                  </div>
+                  <span className="text-[13px] lg:text-[14px] font-[600] text-[#F5F7FA] whitespace-nowrap overflow-hidden text-ellipsis">
+                    {skillItem.skill}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         )}
       </section>
 
-      <section className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-violet-600 dark:bg-emerald-500 flex items-center justify-center text-white shadow-sm transition-colors duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4.5 h-4.5">
-              <path fillRule="evenodd" d="M7.5 4.5a3 3 0 0 0-3 3v.75H3.75a1.5 1.5 0 0 0-1.5 1.5v8.25a1.5 1.5 0 0 0 1.5 1.5h16.5a1.5 1.5 0 0 0 1.5-1.5V9.75a1.5 1.5 0 0 0-1.5-1.5H19.5V7.5a3 3 0 0 0-3-3h-9Zm3 3.75v-.75a1.5 1.5 0 0 1 3 0v.75h-3Z" clipRule="evenodd" />
-            </svg>
+      {/* Projects Section */}
+      <section id="projects" className="space-y-[24px]">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-[32px] h-[32px] bg-[#00D9A5] rounded-[7px] flex items-center justify-center text-[#050A14]">
+              <FaFolder size={16} />
+            </div>
+            <h2 className="text-[20px] lg:text-[22px] font-[750] text-[#F5F7FA] tracking-tight">Projects</h2>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Projects</h2>
+          <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+            <span className="hidden lg:inline">View All Projects</span>
+            <span className="lg:hidden">View All</span>
+            <FiArrowRight />
+          </button>
         </div>
 
         {loadingProjects ? (
-          <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-none animate-pulse">
+          <div className="flex gap-6 overflow-hidden pb-4 animate-pulse">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="flex-shrink-0 w-[85vw] sm:w-[380px] h-48 bg-slate-100 dark:bg-[#0b1329]/50 rounded-2xl border border-slate-200/40 dark:border-slate-800/40"></div>
+              <div key={n} className="w-full lg:w-1/3 h-[240px] bg-[#09111F] rounded-[16px] border border-[#18283D]"></div>
             ))}
           </div>
         ) : projects.length === 0 ? (
-          <div className="py-12 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-white/40 dark:bg-[#0b1329]/10">
-            <p className="text-sm text-slate-400 dark:text-slate-500">No projects added yet.</p>
+          <div className="py-12 text-center border border-dashed border-[#18283D] rounded-xl">
+            <p className="text-sm text-[#8FA7C4]">No projects added yet.</p>
           </div>
         ) : (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <AnimatePresence>
-                {projects.slice(0, showAllProjects ? projects.length : 3).map((project, index) => (
-                  <motion.div 
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3, delay: index >= 3 ? (index - 3) * 0.1 : 0 }}
-                    key={project._id}
-                    className="bg-white dark:bg-[#0b1329]/50 border border-slate-200/60 dark:border-slate-800/60 p-6 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-md flex flex-col justify-between hover:border-violet-500/20 dark:hover:border-emerald-500/20 transition-all duration-300 h-full"
-                  >
-                    <div>
-                      <div className="flex items-center gap-3 mb-3">
+          <div className="relative">
+            {/* Horizontal scroll container for mobile, grid for desktop */}
+            <div className="flex lg:grid lg:grid-cols-3 gap-[24px] overflow-x-auto lg:overflow-visible snap-x snap-mandatory scrollbar-none pb-4 lg:pb-0">
+              {projects.slice(0, 3).map((project) => (
+                <div 
+                  key={project._id}
+                  className="min-w-full lg:min-w-0 shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:h-[280px] transition-all duration-300"
+                >
+                  
+                  {/* --- MOBILE CARD DESIGN --- */}
+                  <div className="lg:hidden flex flex-col justify-between h-full bg-[#061210] border border-[#142A22] rounded-[16px] p-[16px] hover:border-[#00D9A5]/30 transition-all duration-300">
+                    <div className="flex flex-col gap-[12px]">
+                      
+                      {/* Logo and Title+Desc */}
+                      <div className="flex gap-[12px] items-start w-full">
                         {project.logo && (
-                          <div className="h-10 w-auto flex items-center justify-center shrink-0">
-                            <img src={project.logo} alt={`${project.title} logo`} className="max-h-full max-w-[40px] object-contain rounded-md" />
+                          <div className="h-[52px] w-[52px] rounded-[10px] bg-[#050A14] overflow-hidden shrink-0 border border-[#142A22]">
+                            <img src={project.logo} alt="logo" className="w-full h-full object-cover" />
                           </div>
                         )}
-                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight break-words m-0 leading-tight">
-                          {project.title}
-                        </h3>
+                        <div className="flex-1 min-w-0"> {/* min-w-0 prevents horizontal overflow crop */}
+                          <h3 className="text-[15px] font-[700] text-[#F5F7FA] tracking-tight leading-[1.2] mb-[4px] line-clamp-2 break-words">
+                            {project.title}
+                          </h3>
+                          <p className="text-[12px] text-[#8FA7C4] line-clamp-2 leading-[1.4] break-words whitespace-normal">
+                            {project.shortDescription}
+                          </p>
+                        </div>
                       </div>
-                      
-                      <p className="text-sm text-slate-500 dark:text-slate-400 break-words line-clamp-3 leading-relaxed mb-4">
-                        {project.shortDescription}
-                      </p>
 
+                      {/* Tech Tags */}
                       {project.technologies && project.technologies.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mb-5">
-                          {project.technologies.map((tag, i) => (
+                        <div className="flex flex-wrap gap-[6px]">
+                          {project.technologies.slice(0, 4).map((tag, i) => (
                             <span 
                               key={i}
-                              className="px-2.5 py-0.5 text-[11px] font-bold rounded-md bg-violet-50 dark:bg-emerald-950/40 text-violet-600 dark:text-emerald-400 border border-violet-100/50 dark:border-emerald-900/30 uppercase tracking-wide transition-colors duration-300"
+                              className="px-[10px] py-[4px] text-[10px] font-[600] rounded-[6px] bg-[#00D9A5]/10 text-[#00D9A5] border border-[#00D9A5]/20 tracking-wide"
                             >
                               {tag}
                             </span>
@@ -153,54 +186,95 @@ function MainBody() {
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between pt-2 mt-4">
-                      {project.githubLink ? (
-                        <a
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-violet-600 dark:hover:text-emerald-400 flex items-center gap-1.5 transition-colors duration-200"
-                        >
-                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z" />
-                          </svg>
-                          <span>GitHub</span>
-                        </a>
-                      ) : (
-                        <div />
-                      )}
-                      {project.liveLink && (
-                        <a
-                          href={project.liveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 border transition-all duration-300
-                            bg-violet-50 hover:bg-violet-100 text-violet-700 border-violet-200/60
-                            dark:bg-emerald-950/40 dark:hover:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/50"
-                        >
-                          <span>Live Demo</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3 h-3">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                          </svg>
-                        </a>
+                    {/* Footer Links */}
+                    <div className="flex items-center justify-between pt-[16px] mt-[16px]">
+                      <a
+                        href={project.githubLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-[13px] font-[500] flex items-center gap-[6px] transition-colors ${project.githubLink ? 'text-[#F5F7FA] hover:text-[#00D9A5]' : 'text-[#8FA7C4] pointer-events-none'}`}
+                      >
+                        <FaGithub size={16} />
+                        <span>GitHub</span>
+                      </a>
+                      
+                      <a
+                        href={project.liveLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`h-[32px] px-[16px] rounded-full text-[12px] font-[600] flex items-center gap-[6px] transition-all ${project.liveLink ? 'bg-[#00D9A5]/10 text-[#00D9A5] border border-[#00D9A5]/30 hover:bg-[#00D9A5]/20' : 'bg-[#00D9A5]/10 text-[#00D9A5] border border-[#00D9A5]/30 opacity-70'}`}
+                      >
+                        <span>Live Demo</span>
+                        <FiArrowRight size={14} />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* --- DESKTOP CARD DESIGN --- */}
+                  <div className="hidden lg:flex flex-col justify-between h-full">
+                    <div>
+                      <div className="flex items-center gap-3 mb-[16px]">
+                        {project.logo && (
+                          <div className="h-[36px] w-[36px] rounded-[8px] bg-white overflow-hidden shrink-0">
+                            <img src={project.logo} alt="logo" className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <h3 className="text-[16px] font-[700] text-[#F5F7FA] tracking-tight leading-tight line-clamp-2">
+                          {project.title}
+                        </h3>
+                      </div>
+                      
+                      <p className="text-[13px] text-[#8FA7C4] line-clamp-3 leading-relaxed mb-[16px] break-words whitespace-normal">
+                        {project.shortDescription}
+                      </p>
+
+                      {project.technologies && project.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-[16px]">
+                          {project.technologies.slice(0, 4).map((tag, i) => (
+                            <span 
+                              key={i}
+                              className="px-[8px] py-[4px] text-[10px] font-[700] rounded-[4px] bg-[#00B98B]/10 text-[#00D9A5] border border-[#00B98B]/20 uppercase tracking-wider"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
                       )}
                     </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+
+                    <div className="flex items-center justify-between pt-2">
+                      <a
+                        href={project.githubLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-[13px] font-[600] flex items-center gap-2 transition-colors ${project.githubLink ? 'text-[#F5F7FA] hover:text-[#00D9A5]' : 'text-[#8FA7C4] pointer-events-none'}`}
+                      >
+                        <FaGithub size={16} />
+                        <span>GitHub</span>
+                      </a>
+                      
+                      <a
+                        href={project.liveLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`h-[32px] px-[16px] rounded-full text-[12px] font-[700] flex items-center gap-2 transition-all ${project.liveLink ? 'bg-[#00B98B]/10 text-[#00D9A5] border border-[#00B98B]/30 hover:bg-[#00B98B]/20' : 'bg-[#00B98B]/10 text-[#00D9A5] border border-[#00B98B]/30 opacity-70'}`}
+                      >
+                        <span>Live Demo</span>
+                        <FiArrowRight size={14} />
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              ))}
             </div>
-            {projects.length > 3 && (
-              <div className="mt-10 flex justify-center">
-                <button
-                  onClick={() => setShowAllProjects(!showAllProjects)}
-                  className="px-6 py-2.5 rounded-xl font-bold tracking-wide text-sm border shadow-sm transition-all duration-300
-                    bg-white hover:bg-slate-50 text-slate-700 border-slate-200
-                    dark:bg-[#0b1329]/50 dark:hover:bg-[#0b1329]/80 dark:text-slate-300 dark:border-slate-800/60 hover:-translate-y-0.5"
-                >
-                  {showAllProjects ? 'Show Less' : 'View All Projects'}
-                </button>
-              </div>
-            )}
+            
+            {/* Mobile Pagination Dots */}
+            <div className="lg:hidden flex justify-center items-center gap-[6px] mt-[12px]">
+              <div className="w-[16px] h-[6px] rounded-full bg-[#00D9A5]"></div>
+              <div className="w-[6px] h-[6px] rounded-full bg-[#18283D]"></div>
+              <div className="w-[6px] h-[6px] rounded-full bg-[#18283D]"></div>
+            </div>
           </div>
         )}
       </section>

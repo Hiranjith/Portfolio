@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", "sans-serif";
+}
+
+@layer base {
+  body {
+    background-color: #050A14;
+    color: #F5F7FA;
+    font-family: var(--font-sans);
+  }
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Premium scrollbar utilities */

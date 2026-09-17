@@ -16,10 +16,10 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#060b13] text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col justify-between">
-      <div>
+    <div className="min-h-screen flex flex-col justify-between">
+      <div className="w-full">
         <Header />
-        <main className="max-w-7xl mx-auto px-6 md:px-8 py-12">
+        <main className="max-w-[1280px] mx-auto px-[24px] md:px-[80px] py-[40px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />

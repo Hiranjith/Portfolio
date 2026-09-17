@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function Header() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -21,7 +22,7 @@ function Header() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '#about' },
+    { name: 'About', path: '/about' },
     { name: 'Skills', path: '#skills' },
     { name: 'Projects', path: '#projects' },
     { name: 'Experience', path: '/experience' }, // Based on mobile feedback
@@ -31,13 +32,26 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-[#050A14]/90 backdrop-blur-md border-b border-[#18283D]">
       <div className="max-w-[1280px] mx-auto px-[24px] md:px-[80px] h-[72px] flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="h-[32px] w-[32px] md:h-[40px] md:w-[40px] flex items-center justify-center">
-            <img src="/logos/Hiranjith%20Logo.png" alt="Hiranjith Logo" className="h-full w-full object-contain" />
-          </div>
-          <span className="text-[15px] font-[700] text-[#F5F7FA]">Hiranjith E M</span>
-        </Link>
+        {/* Logo / Back Button */}
+        <div className="flex items-center">
+          <Link to="/" className={`${location.pathname !== '/' ? 'hidden md:flex' : 'flex'} items-center gap-3 group`}>
+            <div className="h-[32px] w-[32px] md:h-[40px] md:w-[40px] flex items-center justify-center">
+              <img src="/Logos/Hiranjith%20Logo.png" alt="Hiranjith Logo" className="h-full w-full object-contain" />
+            </div>
+            <span className="text-[15px] font-[700] text-[#F5F7FA]">Hiranjith E M</span>
+          </Link>
+          
+          {location.pathname !== '/' && (
+            <button 
+              onClick={() => navigate(-1)} 
+              className="md:hidden flex items-center justify-center text-[#F5F7FA] hover:text-[#00D9A5] p-1 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-[22px] h-[22px]">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+            </button>
+          )}
+        </div>
         
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-[32px]">
@@ -61,20 +75,21 @@ function Header() {
 
         {/* Right side (Theme + Resume + Mobile Menu) */}
         <div className="flex items-center gap-[16px]">
-          <button 
-            onClick={toggleTheme}
-            className="text-[#F5F7FA] hover:text-[#00D9A5] transition-colors"
-          >
-            {theme === 'dark' ? (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-[20px] h-[20px] text-[#FFC107]">
-                <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 1 1-16.949-11.84.75.75 0 0 1 .833.268Z" clipRule="evenodd" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-[20px] h-[20px]">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-              </svg>
+          
+          {/* Mobile Home Button or Theme Toggle */}
+          <div className="md:hidden flex items-center">
+            {location.pathname !== '/' && (
+              <button 
+                onClick={() => navigate('/')}
+                className="text-[#00D9A5] p-1 transition-colors flex items-center justify-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-[22px] h-[22px]">
+                  <path d="M11.47 3.84a.75.75 0 011.06 0l8.99 8.99a.75.75 0 11-1.06 1.06l-1.71-1.71v6.57a1.5 1.5 0 01-1.5 1.5h-3a1.5 1.5 0 01-1.5-1.5v-4.5a.5.5 0 00-.5-.5h-1.5a.5.5 0 00-.5.5v4.5a1.5 1.5 0 01-1.5 1.5h-3a1.5 1.5 0 01-1.5-1.5v-6.57l-1.71 1.71a.75.75 0 11-1.06-1.06l8.99-8.99z" />
+                </svg>
+              </button>
             )}
-          </button>
+          </div>
+          
 
           <button className="hidden sm:flex items-center gap-2 px-[16px] py-[8px] border border-[#00B98B] bg-[#00B98B]/10 hover:bg-[#00B98B]/20 text-[#00D9A5] rounded-[6px] text-[13px] font-[600] transition-colors">
             <span>Download Resume</span>

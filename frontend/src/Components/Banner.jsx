@@ -76,7 +76,7 @@ function Banner() {
               <MdOutlineWork size={20} className="md:w-[20px] md:h-[20px] w-[20px] h-[20px]" />
             </div>
             <div className="text-left pt-[2px] md:pt-[4px]">
-              <div className="text-[14px] md:text-[18px] font-[700] text-[#F5F7FA] leading-tight">2.9+</div>
+              <div className="text-[14px] md:text-[18px] font-[700] text-[#F5F7FA] leading-tight">3+</div>
               <div className="text-[11px] md:text-[12px] text-[#8FA7C4]">Experience</div>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Experience from './Experience'
 import Contact from './Contact'
 
@@ -7,6 +8,7 @@ function MainBody() {
   const [projects, setProjects] = useState([])
   const [loadingSkills, setLoadingSkills] = useState(true)
   const [loadingProjects, setLoadingProjects] = useState(true)
+  const [showAllProjects, setShowAllProjects] = useState(false)
 
   useEffect(() => {
     const fetchSkills = async () => {
@@ -108,69 +110,97 @@ function MainBody() {
             <p className="text-sm text-slate-400 dark:text-slate-500">No projects added yet.</p>
           </div>
         ) : (
-          <div className="flex gap-6 overflow-x-auto pb-6 scroll-smooth snap-x snap-mandatory -mx-6 px-6 md:-mx-8 md:px-8 lg:-mx-0 lg:px-0 scrollbar-thin">
-            {projects.map((project) => (
-              <div 
-                key={project._id}
-                className="flex-shrink-0 w-[85vw] sm:w-[380px] snap-start bg-white dark:bg-[#0b1329]/50 border border-slate-200/60 dark:border-slate-800/60 p-6 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-md flex flex-col justify-between hover:border-violet-500/20 dark:hover:border-emerald-500/20 transition-all duration-300"
-              >
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight break-words mb-2">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-sm text-slate-500 dark:text-slate-400 break-words line-clamp-3 leading-relaxed mb-4">
-                    {project.shortDescription}
-                  </p>
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <AnimatePresence>
+                {projects.slice(0, showAllProjects ? projects.length : 3).map((project, index) => (
+                  <motion.div 
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, delay: index >= 3 ? (index - 3) * 0.1 : 0 }}
+                    key={project._id}
+                    className="bg-white dark:bg-[#0b1329]/50 border border-slate-200/60 dark:border-slate-800/60 p-6 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-md flex flex-col justify-between hover:border-violet-500/20 dark:hover:border-emerald-500/20 transition-all duration-300 h-full"
+                  >
+                    <div>
+                      <div className="flex items-center gap-3 mb-3">
+                        {project.logo && (
+                          <div className="h-10 w-auto flex items-center justify-center shrink-0">
+                            <img src={project.logo} alt={`${project.title} logo`} className="max-h-full max-w-[40px] object-contain rounded-md" />
+                          </div>
+                        )}
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight break-words m-0 leading-tight">
+                          {project.title}
+                        </h3>
+                      </div>
+                      
+                      <p className="text-sm text-slate-500 dark:text-slate-400 break-words line-clamp-3 leading-relaxed mb-4">
+                        {project.shortDescription}
+                      </p>
 
-                  {project.technologies && project.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {project.technologies.map((tag, i) => (
-                        <span 
-                          key={i}
-                          className="px-2.5 py-0.5 text-[11px] font-bold rounded-md bg-violet-50 dark:bg-emerald-950/40 text-violet-600 dark:text-emerald-400 border border-violet-100/50 dark:border-emerald-900/30 uppercase tracking-wide transition-colors duration-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      {project.technologies && project.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 mb-5">
+                          {project.technologies.map((tag, i) => (
+                            <span 
+                              key={i}
+                              className="px-2.5 py-0.5 text-[11px] font-bold rounded-md bg-violet-50 dark:bg-emerald-950/40 text-violet-600 dark:text-emerald-400 border border-violet-100/50 dark:border-emerald-900/30 uppercase tracking-wide transition-colors duration-300"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  {project.githubLink ? (
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-violet-600 dark:hover:text-emerald-400 flex items-center gap-1.5 transition-colors duration-200"
-                    >
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z" />
-                      </svg>
-                      <span>GitHub</span>
-                    </a>
-                  ) : (
-                    <div />
-                  )}
-                  {project.liveLink && (
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 border transition-all duration-300
-                        bg-violet-50 hover:bg-violet-100 text-violet-700 border-violet-200/60
-                        dark:bg-emerald-950/40 dark:hover:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/50"
-                    >
-                      <span>Live Demo</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3 h-3">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
+                    <div className="flex items-center justify-between pt-2 mt-4">
+                      {project.githubLink ? (
+                        <a
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-violet-600 dark:hover:text-emerald-400 flex items-center gap-1.5 transition-colors duration-200"
+                        >
+                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z" />
+                          </svg>
+                          <span>GitHub</span>
+                        </a>
+                      ) : (
+                        <div />
+                      )}
+                      {project.liveLink && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 border transition-all duration-300
+                            bg-violet-50 hover:bg-violet-100 text-violet-700 border-violet-200/60
+                            dark:bg-emerald-950/40 dark:hover:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/50"
+                        >
+                          <span>Live Demo</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-3 h-3">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+            {projects.length > 3 && (
+              <div className="mt-10 flex justify-center">
+                <button
+                  onClick={() => setShowAllProjects(!showAllProjects)}
+                  className="px-6 py-2.5 rounded-xl font-bold tracking-wide text-sm border shadow-sm transition-all duration-300
+                    bg-white hover:bg-slate-50 text-slate-700 border-slate-200
+                    dark:bg-[#0b1329]/50 dark:hover:bg-[#0b1329]/80 dark:text-slate-300 dark:border-slate-800/60 hover:-translate-y-0.5"
+                >
+                  {showAllProjects ? 'Show Less' : 'View All Projects'}
+                </button>
               </div>
-            ))}
+            )}
           </div>
         )}
       </section>

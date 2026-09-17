@@ -3,7 +3,7 @@ import Project from "../models/projectModel.js";
 
 export const addProject = assyncHandler(async(req, res) => {
     try {
-        const {title, shortDescription, liveLink, githubLink, technologies} = req.body
+        const {title, shortDescription, liveLink, githubLink, logo, technologies} = req.body
         if (!title || !shortDescription) {
             throw new Error("title or description is missing...!")
         }
@@ -13,6 +13,7 @@ export const addProject = assyncHandler(async(req, res) => {
             shortDescription,
             liveLink,
             githubLink,
+            logo,
             technologies
         })
 
@@ -25,7 +26,7 @@ export const addProject = assyncHandler(async(req, res) => {
 
 export const showAllProject = assyncHandler(async(req, res) => {
     try {
-        const projects = await Project.find({})
+        const projects = await Project.find({}).sort({ _id: -1 })
 
         if (!projects) {
              throw new Error("No projects found");
@@ -62,12 +63,12 @@ export const removeProject = assyncHandler(async(req, res) => {
 
 export const updateProject = assyncHandler(async (req, res) => {
     try {
-        const { title, shortDescription, liveLink, githubLink, technologies } = req.body;
+        const { title, shortDescription, liveLink, githubLink, logo, technologies } = req.body;
         const { id } = req.params;
 
         const project = await Project.findByIdAndUpdate(
             id, 
-            { title, shortDescription, liveLink, githubLink, technologies },
+            { title, shortDescription, liveLink, githubLink, logo, technologies },
             { new: true, runValidators: true } 
         );
 

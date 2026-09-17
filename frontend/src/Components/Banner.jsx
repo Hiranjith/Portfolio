@@ -64,7 +64,7 @@ function Banner() {
         <div className="absolute w-72 h-72 rounded-full bg-violet-400/20 dark:bg-emerald-400/10 blur-3xl -z-10 animate-pulse"></div>
           <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[350px] md:h-[350px] rounded-full p-1 bg-gradient-to-tr from-violet-500 to-indigo-500 dark:from-emerald-500 dark:to-teal-500 shadow-xl dark:shadow-emerald-950/20 overflow-hidden transition-all duration-300">
             <div className="w-full h-full rounded-full bg-slate-100 dark:bg-[#111827] overflow-hidden flex items-center justify-center border-4 border-white dark:border-[#080d1a] transition-all duration-300">
-              <img src="https://shopzee-storage.s3.eu-north-1.amazonaws.com/Shopzee_test_images/ChatGPT+Image+May+29%2C+2026%2C+10_11_59+AM+(1).png" alt="" />
+              <img src="/profile%20picture.png" alt="Hiranjith E M" className="w-full h-full object-cover" />
             </div>
           </div>
 

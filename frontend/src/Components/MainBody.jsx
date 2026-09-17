@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaUserAlt, FaFolder, FaGithub } from 'react-icons/fa'
 import { FiArrowRight } from 'react-icons/fi'
-import { SiReact, SiNodedotjs, SiMongodb, SiJavascript, SiTailwindcss } from 'react-icons/si'
+import { SiReact, SiNodedotjs, SiMongodb, SiJavascript, SiTailwindcss, SiTypescript, SiGit, SiDocker } from 'react-icons/si'
 import Experience from './Experience'
 import Contact from './Contact'
 
@@ -85,28 +85,72 @@ function MainBody() {
             <p className="text-sm text-[#8FA7C4]">No skills added yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-6 gap-[12px] lg:gap-[16px]">
-            {skills.slice(0, 6).map((skillItem) => {
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[12px] lg:gap-[16px]">
+            {skills.slice(0, 9).map((skillItem) => {
               const skillName = skillItem.skill.toLowerCase()
-              let Icon = <span className="font-mono text-[#00D9A5]">{'{}'}</span>
-              if (skillName.includes('react')) Icon = <SiReact className="text-[#00D9A5] text-[18px]" />
-              else if (skillName.includes('node')) Icon = <SiNodedotjs className="text-[#00D9A5] text-[18px]" />
-              else if (skillName.includes('express')) Icon = <span className="text-[#A0B3C6] font-[500] text-[16px] leading-none">ex</span>
-              else if (skillName.includes('mongo')) Icon = <SiMongodb className="text-[#00D9A5] text-[18px]" />
-              else if (skillName.includes('java') || skillName.includes('js')) Icon = <SiJavascript className="text-[#FFD700] text-[16px]" />
-              else if (skillName.includes('tailwind')) Icon = <SiTailwindcss className="text-[#47bfff] text-[18px]" />
+              
+              // Define mobile and desktop icons separately to handle sizes and original brand colors
+              let IconMobile = <span className="font-mono text-[#00D9A5] text-[22px]">{'{}'}</span>
+              let IconDesktop = <span className="font-mono text-[#00D9A5] text-[18px]">{'{}'}</span>
+
+              if (skillName.includes('react')) {
+                IconMobile = <SiReact className="text-[#61DAFB] text-[32px]" />
+                IconDesktop = <SiReact className="text-[#00D9A5] text-[18px]" />
+              }
+              else if (skillName.includes('node')) {
+                IconMobile = <SiNodedotjs className="text-[#339933] text-[32px]" />
+                IconDesktop = <SiNodedotjs className="text-[#00D9A5] text-[18px]" />
+              }
+              else if (skillName.includes('express')) {
+                IconMobile = <span className="text-[#8FA7C4] font-[400] text-[28px] leading-none tracking-tighter">ex</span>
+                IconDesktop = <span className="text-[#A0B3C6] font-[500] text-[16px] leading-none">ex</span>
+              }
+              else if (skillName.includes('mongo')) {
+                IconMobile = <SiMongodb className="text-[#47A248] text-[32px]" />
+                IconDesktop = <SiMongodb className="text-[#00D9A5] text-[18px]" />
+              }
+              else if (skillName.includes('typescript') || skillName.includes('ts')) {
+                IconMobile = <SiTypescript className="text-[#3178C6] text-[28px] rounded-[4px]" />
+                IconDesktop = <SiTypescript className="text-[#1976d2] text-[16px]" />
+              }
+              else if (skillName.includes('java') || skillName.includes('js')) {
+                IconMobile = <SiJavascript className="text-[#F7DF1E] text-[28px] rounded-[4px]" />
+                IconDesktop = <SiJavascript className="text-[#FFD700] text-[16px]" />
+              }
+              else if (skillName.includes('tailwind')) {
+                IconMobile = <SiTailwindcss className="text-[#06B6D4] text-[32px]" />
+                IconDesktop = <SiTailwindcss className="text-[#47bfff] text-[18px]" />
+              }
+              else if (skillName.includes('git')) {
+                IconMobile = <SiGit className="text-[#F05032] text-[32px]" />
+                IconDesktop = <SiGit className="text-[#f4511e] text-[18px]" />
+              }
+              else if (skillName.includes('docker')) {
+                IconMobile = <SiDocker className="text-[#2496ED] text-[32px]" />
+                IconDesktop = <SiDocker className="text-[#0288d1] text-[18px]" />
+              }
 
               return (
-                <div 
-                  key={skillItem._id}
-                  className="bg-transparent lg:bg-[#09111F] border border-[#18283D] h-[48px] lg:h-[64px] px-[12px] lg:px-[16px] rounded-[10px] lg:rounded-[12px] flex items-center justify-start lg:justify-center gap-[10px] lg:gap-3 hover:border-[#00D9A5]/50 transition-all duration-300"
-                >
-                  <div className="flex items-center justify-center w-[24px]">
-                    {Icon}
+                <div key={skillItem._id}>
+                  {/* --- MOBILE SKILL CARD DESIGN --- */}
+                  <div className="lg:hidden flex flex-col items-center justify-center gap-[10px] bg-[#09111F] border border-[#18283D] rounded-[16px] aspect-square p-[12px] hover:border-[#00D9A5]/50 transition-all duration-300">
+                    <div className="flex items-center justify-center h-[36px]">
+                      {IconMobile}
+                    </div>
+                    <span className="text-[11px] font-[500] text-[#8FA7C4] whitespace-nowrap overflow-hidden text-ellipsis w-full text-center">
+                      {skillItem.skill}
+                    </span>
                   </div>
-                  <span className="text-[13px] lg:text-[14px] font-[600] text-[#F5F7FA] whitespace-nowrap overflow-hidden text-ellipsis">
-                    {skillItem.skill}
-                  </span>
+
+                  {/* --- DESKTOP SKILL CHIP DESIGN --- */}
+                  <div className="hidden lg:flex bg-[#09111F] border border-[#18283D] h-[64px] px-[16px] rounded-[12px] items-center justify-center gap-3 hover:border-[#00D9A5]/50 transition-all duration-300">
+                    <div className="flex items-center justify-center w-[24px]">
+                      {IconDesktop}
+                    </div>
+                    <span className="text-[14px] font-[600] text-[#F5F7FA] whitespace-nowrap overflow-hidden text-ellipsis">
+                      {skillItem.skill}
+                    </span>
+                  </div>
                 </div>
               )
             })}

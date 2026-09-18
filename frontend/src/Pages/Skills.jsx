@@ -9,7 +9,6 @@ import {
 } from 'react-icons/si';
 import { TbApi, TbPlugConnected, TbBrandVscode } from 'react-icons/tb';
 import { FaDatabase, FaAws } from 'react-icons/fa';
-import skillBanner from '../../public/banner/skill-banner.png';
 
 const skillCategories = [
   {
@@ -105,7 +104,7 @@ function Skills() {
         <div className="hidden md:block md:w-1/2">
           <div className="relative w-full max-w-[400px] lg:max-w-[500px] ml-auto">
             <img 
-              src={skillBanner}
+              src="/Banner/skill-banner.png"
               alt="Skills Banner" 
               className="w-full object-contain"
             />

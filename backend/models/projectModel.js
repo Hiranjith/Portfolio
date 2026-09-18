@@ -6,6 +6,7 @@ const projectSchema = mongoose.Schema({
     liveLink: { type: String, trim: true },
     githubLink: {type: String, trim: true },
     logo: { type: String, trim: true },
+    thumbnail: { type: String, trim: true },
     technologies: { type: [String], default: [] }
 })
 

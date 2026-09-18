@@ -23,7 +23,7 @@ function Header() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Skills', path: '#skills' },
+    { name: 'Skills', path: '/skills' },
     { name: 'Projects', path: '#projects' },
     { name: 'Experience', path: '/experience' }, // Based on mobile feedback
     { name: 'Contact', path: '/contact' } // Based on mobile feedback

@@ -1,34 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SkillManager from '../Components/SkillManager'
 import ProjectManager from '../Components/ProjectManager'
 
 function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState('projects')
+
   return (
-    <div className="space-y-10 py-4">
-      <div className="border-b border-slate-100 dark:border-slate-800/60 pb-6 flex items-center justify-between">
+    <div className="space-y-8 py-6 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800/60">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-slate-900 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-slate-900 dark:text-white mb-2">
             Admin Control Center
           </h1>
-          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-            Control center to manage your skills and projects.
+          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-2xl">
+            Manage your portfolio content. Add new projects, update existing ones, or refine your professional skills list.
           </p>
         </div>
         
-          <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-          Live Admin Session
+        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20 shadow-sm backdrop-blur-sm self-start md:self-auto">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Live Session Active
         </span>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
-        <div className="xl:col-span-1">
-          <SkillManager />
-        </div>
+      {/* Tabs */}
+      <div className="flex space-x-1 p-1.5 bg-slate-100/50 dark:bg-[#0e172e]/50 backdrop-blur-md rounded-2xl border border-slate-200/50 dark:border-slate-800/50 max-w-fit">
+        <button
+          onClick={() => setActiveTab('projects')}
+          className={`flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
+            activeTab === 'projects'
+              ? 'bg-white dark:bg-[#1a233a] text-violet-600 dark:text-violet-400 shadow-sm border border-slate-200/50 dark:border-slate-700/50'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-white/5'
+          }`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
+          </svg>
+          Projects
+        </button>
+        <button
+          onClick={() => setActiveTab('skills')}
+          className={`flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
+            activeTab === 'skills'
+              ? 'bg-white dark:bg-[#1a233a] text-emerald-600 dark:text-emerald-400 shadow-sm border border-slate-200/50 dark:border-slate-700/50'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-white/5'
+          }`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+             <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 21l8.982-5.025a9 9 0 0 0 4.162-7.999V6.375c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v3.602c0 3.224 1.704 6.22 4.51 7.998L9.813 15.904Z" />
+             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6h19.5M12 5.25v2.25M9 6h6" />
+          </svg>
+          Skills
+        </button>
+      </div>
 
-        <div className="xl:col-span-2">
-          <ProjectManager />
-        </div>
+      <div className="mt-8 transition-all duration-500">
+        {activeTab === 'projects' ? <ProjectManager /> : <SkillManager />}
       </div>
     </div>
   )

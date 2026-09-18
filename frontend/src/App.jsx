@@ -6,6 +6,7 @@ import Login from './Services/Login'
 import Home from './Pages/Home'
 import About from './Components/About'
 import AdminDashboard from './Pages/AdminDashboard'
+import Skills from './Pages/Skills'
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token')
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/skills" element={<Skills />} />
             <Route path='/login' element={<Login />} />
             <Route 
               path='/dashboard' 

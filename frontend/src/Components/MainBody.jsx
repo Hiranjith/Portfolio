@@ -191,13 +191,20 @@ function MainBody() {
               {projects.slice(0, 3).map((project) => (
                 <div 
                   key={project._id}
-                  className="w-full max-w-full lg:w-auto lg:max-w-none shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:h-[280px] transition-all duration-300"
+                  className="w-full max-w-full lg:w-auto lg:max-w-none shrink-0 snap-center bg-transparent border-transparent lg:bg-[#09111F] lg:border-[#18283D] p-0 lg:p-[24px] rounded-[16px] h-auto lg:min-h-[320px] transition-all duration-300"
                 >
                   
                   {/* --- MOBILE CARD DESIGN --- */}
                   <div className="w-full overflow-hidden lg:hidden flex flex-col justify-between h-full bg-[#061210] border border-[#142A22] rounded-[16px] p-[16px] hover:border-[#00D9A5]/30 transition-all duration-300">
                     <div className="flex flex-col gap-[12px]">
                       
+                      {/* Thumbnail */}
+                      {project.thumbnail && (
+                        <div className="w-full h-[120px] rounded-[10px] overflow-hidden mb-[4px] border border-[#142A22]">
+                          <img src={project.thumbnail} alt="thumbnail" className="w-full h-full object-cover" />
+                        </div>
+                      )}
+
                       {/* Logo and Title+Desc */}
                       <div className="flex gap-[12px] items-start w-full">
                         {project.logo && (
@@ -257,6 +264,13 @@ function MainBody() {
                   {/* --- DESKTOP CARD DESIGN --- */}
                   <div className="hidden lg:flex flex-col justify-between h-full">
                     <div>
+                      {/* Thumbnail */}
+                      {project.thumbnail && (
+                        <div className="w-full h-[140px] rounded-[10px] overflow-hidden mb-[16px] border border-[#18283D]">
+                          <img src={project.thumbnail} alt="thumbnail" className="w-full h-full object-cover" />
+                        </div>
+                      )}
+
                       <div className="flex items-center gap-3 mb-[16px]">
                         {project.logo && (
                           <div className="h-[36px] w-[36px] rounded-[8px] bg-white overflow-hidden shrink-0">

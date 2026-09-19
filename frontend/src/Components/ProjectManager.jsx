@@ -4,11 +4,14 @@ function ProjectManager() {
   const [projects, setProjects] = useState([])
   const [title, setTitle] = useState('')
   const [shortDescription, setShortDescription] = useState('')
+  const [detailedDescription, setDetailedDescription] = useState('')
   const [liveLink, setLiveLink] = useState('')
   const [githubLink, setGithubLink] = useState('')
   const [logo, setLogo] = useState('')
   const [thumbnail, setThumbnail] = useState('')
   const [technologies, setTechnologies] = useState('')
+  const [features, setFeatures] = useState('')
+  const [requirements, setRequirements] = useState('')
   
   const [editingProjectId, setEditingProjectId] = useState(null)
   
@@ -58,11 +61,14 @@ function ProjectManager() {
     const payload = {
       title: title.trim(),
       shortDescription: shortDescription.trim(),
+      detailedDescription: detailedDescription.trim(),
       liveLink: liveLink.trim(),
       githubLink: githubLink.trim(),
       logo: logo.trim(),
       thumbnail: thumbnail.trim(),
-      technologies: technologies.split(',').map(t => t.trim()).filter(Boolean)
+      technologies: technologies.split(',').map(t => t.trim()).filter(Boolean),
+      features: features.split('\n').map(f => f.trim()).filter(Boolean),
+      requirements: requirements.split('\n').map(r => r.trim()).filter(Boolean)
     }
 
     try {
@@ -137,11 +143,14 @@ function ProjectManager() {
     setEditingProjectId(project._id)
     setTitle(project.title)
     setShortDescription(project.shortDescription)
+    setDetailedDescription(project.detailedDescription || '')
     setLiveLink(project.liveLink || '')
     setGithubLink(project.githubLink || '')
     setLogo(project.logo || '')
     setThumbnail(project.thumbnail || '')
     setTechnologies(project.technologies ? project.technologies.join(', ') : '')
+    setFeatures(project.features ? project.features.join('\n') : '')
+    setRequirements(project.requirements ? project.requirements.join('\n') : '')
     setError('')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -150,11 +159,14 @@ function ProjectManager() {
     setEditingProjectId(null)
     setTitle('')
     setShortDescription('')
+    setDetailedDescription('')
     setLiveLink('')
     setGithubLink('')
     setLogo('')
     setThumbnail('')
     setTechnologies('')
+    setFeatures('')
+    setRequirements('')
   }
 
   return (
@@ -228,9 +240,51 @@ function ProjectManager() {
                   onChange={(e) => setShortDescription(e.target.value)}
                   placeholder="Brief summary of the project..."
                   disabled={actionLoading}
-                  rows={4}
+                  rows={2}
                   className="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white/50 dark:bg-[#0e172e]/60 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 dark:focus:ring-emerald-500/10 dark:focus:border-emerald-500 disabled:opacity-50 transition-all duration-300 shadow-sm hover:border-slate-300 dark:hover:border-slate-600 resize-none"
                   required
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                  Detailed Description
+                </label>
+                <textarea
+                  value={detailedDescription}
+                  onChange={(e) => setDetailedDescription(e.target.value)}
+                  placeholder="Full description shown in the project modal..."
+                  disabled={actionLoading}
+                  rows={4}
+                  className="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white/50 dark:bg-[#0e172e]/60 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 dark:focus:ring-emerald-500/10 dark:focus:border-emerald-500 disabled:opacity-50 transition-all duration-300 shadow-sm hover:border-slate-300 dark:hover:border-slate-600 resize-y"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                  Features (One per line)
+                </label>
+                <textarea
+                  value={features}
+                  onChange={(e) => setFeatures(e.target.value)}
+                  placeholder="User authentication&#10;Real-time chat&#10;Responsive design"
+                  disabled={actionLoading}
+                  rows={4}
+                  className="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white/50 dark:bg-[#0e172e]/60 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 dark:focus:ring-emerald-500/10 dark:focus:border-emerald-500 disabled:opacity-50 transition-all duration-300 shadow-sm hover:border-slate-300 dark:hover:border-slate-600 resize-y"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                  Requirements (One per line)
+                </label>
+                <textarea
+                  value={requirements}
+                  onChange={(e) => setRequirements(e.target.value)}
+                  placeholder="Node.js 18+&#10;MongoDB cluster&#10;API keys"
+                  disabled={actionLoading}
+                  rows={3}
+                  className="w-full px-4 py-3 text-sm rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white/50 dark:bg-[#0e172e]/60 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 dark:focus:ring-emerald-500/10 dark:focus:border-emerald-500 disabled:opacity-50 transition-all duration-300 shadow-sm hover:border-slate-300 dark:hover:border-slate-600 resize-y"
                 />
               </div>
 
@@ -373,8 +427,12 @@ function ProjectManager() {
                   <div>
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div className="flex items-center gap-3">
-                        {project.logo ? (
-                          <img src={project.logo} alt={`${project.title} logo`} className="w-10 h-10 rounded-xl object-cover border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 shrink-0" />
+                        {(project.logo || project.title?.toLowerCase().includes('fitness')) ? (
+                          <img 
+                            src={project.logo || '/projects/ff logo.png'} 
+                            alt={`${project.title} logo`} 
+                            className="w-10 h-10 rounded-xl object-cover border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 shrink-0" 
+                          />
                         ) : project.thumbnail ? (
                           <img src={project.thumbnail} alt={`${project.title} thumbnail`} className="w-10 h-10 rounded-xl object-cover border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 shrink-0" />
                         ) : null}

@@ -5,6 +5,7 @@ import  {Routes, Route, Navigate}  from 'react-router-dom'
 import Login from './Services/Login'
 import Home from './Pages/Home'
 import About from './Components/About'
+import Projects from './Pages/Projects'
 import AdminDashboard from './Pages/AdminDashboard'
 import Skills from './Pages/Skills'
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/skills" element={<Skills />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path='/login' element={<Login />} />
             <Route 
               path='/dashboard' 

@@ -3,11 +3,14 @@ import mongoose from "mongoose";
 const projectSchema = mongoose.Schema({
     title : {type : String, required : true},
     shortDescription : {type : String, required : true},
+    detailedDescription: { type: String, default: '' },
     liveLink: { type: String, trim: true },
     githubLink: {type: String, trim: true },
     logo: { type: String, trim: true },
     thumbnail: { type: String, trim: true },
-    technologies: { type: [String], default: [] }
+    technologies: { type: [String], default: [] },
+    features: { type: [String], default: [] },
+    requirements: { type: [String], default: [] }
 })
 
 const Project = mongoose.model('Project', projectSchema)

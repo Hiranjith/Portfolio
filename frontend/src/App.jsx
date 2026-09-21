@@ -8,6 +8,7 @@ import About from './Components/About'
 import Projects from './Pages/Projects'
 import AdminDashboard from './Pages/AdminDashboard'
 import Skills from './Pages/Skills'
+import Experience from './Pages/Experience'
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token')
@@ -22,12 +23,13 @@ function App() {
     <div className="min-h-screen flex flex-col justify-between">
       <div className="w-full">
         <Header />
-        <main className="max-w-[1280px] mx-auto px-[24px] md:px-[80px] py-[40px]">
+        <main className="max-w-[1280px] mx-auto px-[24px] md:px-[80px] pt-[16px] pb-[40px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/experience" element={<Experience />} />
             <Route path='/login' element={<Login />} />
             <Route 
               path='/dashboard' 

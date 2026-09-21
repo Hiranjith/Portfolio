@@ -14,15 +14,13 @@ function About() {
       {/* Top Banner Section */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-[32px] md:gap-[40px]">
         {/* Left Column */}
-        <div className="flex-1 space-y-[20px] md:space-y-[24px] text-left z-10 w-full">
-          <div className="space-y-[8px]">
-            <div className="text-[#00D9A5] font-[700] text-[12px] md:text-[14px] tracking-widest uppercase">ABOUT ME</div>
-            <h1 className="text-[32px] md:text-[48px] lg:text-[56px] font-[800] text-[#F5F7FA] leading-[1.1] tracking-tight">
-              More than just code,<br />I build <span className="text-[#00D9A5]">solutions.</span>
-            </h1>
-          </div>
+        <div className="flex-1 text-left z-10 w-full">
+          <h4 className="text-[#00D9A5] text-[12px] font-bold tracking-[0.2em] uppercase mb-4">ABOUT ME</h4>
+          <h1 className="text-4xl md:text-[48px] font-[800] leading-[1.1] mb-5 tracking-tight text-white">
+            More than just code,<br />I build <span className="text-[#00D9A5]">solutions.</span>
+          </h1>
           
-          <p className="text-[#A0B3C6] text-[15px] md:text-[18px] leading-[1.6] max-w-[500px]">
+          <p className="text-[#94A3B8] text-[15px] md:text-[16px] leading-relaxed max-w-[500px]">
             I'm Hiranjith E M, a MERN stack developer passionate about building modern web applications and solving real-world problems. I enjoy turning ideas into useful products that create impact.
           </p>
         </div>

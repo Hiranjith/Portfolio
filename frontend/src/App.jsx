@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
+import ScrollToTop from './Components/ScrollToTop'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Login from './Services/Login'
 import Home from './Pages/Home'
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Header />
       <main className="w-full max-w-[1280px] mx-auto px-[24px] md:px-[80px] pt-[16px] pb-[24px] lg:pb-[40px]">
           <Routes>

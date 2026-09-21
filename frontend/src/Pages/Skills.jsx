@@ -89,14 +89,14 @@ function Skills() {
       {/* Top Header */}
       <div className="flex flex-col md:flex-row gap-8 lg:gap-12 md:items-center justify-between mb-12 md:mb-16">
         <div className="md:w-1/2">
-          <div className="text-[#00D9A5] font-[700] text-[12px] md:text-[14px] tracking-widest uppercase mb-3">
+          <h4 className="text-[#00D9A5] text-[12px] font-bold tracking-[0.2em] uppercase mb-4">
             MY SKILLS
-          </div>
-          <h1 className="text-[32px] md:text-[48px] lg:text-[56px] font-[800] text-[#F5F7FA] leading-[1.2] mb-6">
+          </h4>
+          <h1 className="text-4xl md:text-[48px] font-[800] leading-[1.1] mb-5 tracking-tight text-white">
             Tools & Technologies <br className="hidden md:block" />
             <span className="text-[#00D9A5]">I Work With</span>
           </h1>
-          <p className="text-[#A0B3C6] text-[16px] md:text-[18px] leading-[1.6] max-w-lg">
+          <p className="text-[#94A3B8] text-[15px] md:text-[16px] leading-relaxed max-w-[500px]">
             A collection of technologies, tools and frameworks I use to build modern, scalable and user-friendly web applications.
           </p>
         </div>

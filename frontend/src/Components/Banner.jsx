@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaLinkedinIn, FaGithub, FaTwitter } from 'react-icons/fa'
+import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa'
 import { MdOutlineWork, MdLocationOn } from 'react-icons/md'
 import { FiCode, FiArrowRight } from 'react-icons/fi'
 
@@ -8,15 +8,13 @@ function Banner() {
     <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-[40px] pt-[10px] md:pt-[40px] pb-0">
       
       {/* Left Column */}
-      <div className="flex-1 space-y-[24px] text-left z-10 w-full">
-        <div className="space-y-[8px]">
-          <div className="text-[#00D9A5] font-[700] text-[12px] md:text-[14px] tracking-widest uppercase">Mern Stack Developer</div>
-          <h1 className="text-[40px] md:text-[64px] font-[800] text-[#F5F7FA] leading-[1.1] tracking-tight">
-            Hiranjith <span className="text-[#00D9A5]">E M</span>
-          </h1>
-        </div>
+      <div className="flex-1 text-left z-10 w-full">
+        <h4 className="text-[#00D9A5] text-[12px] font-bold tracking-[0.2em] uppercase mb-4">MERN STACK DEVELOPER</h4>
+        <h1 className="text-4xl md:text-[48px] font-[800] leading-[1.1] mb-5 tracking-tight text-white">
+          Hiranjith <span className="text-[#00D9A5]">E M</span>
+        </h1>
         
-        <p className="text-[#A0B3C6] text-[16px] md:text-[18px] leading-[1.6] max-w-[480px]">
+        <p className="text-[#94A3B8] text-[15px] md:text-[16px] leading-relaxed max-w-[500px] mb-8">
           I build modern, responsive and scalable web applications using the MERN stack.
         </p>
         
@@ -32,16 +30,19 @@ function Banner() {
 
         {/* Socials */}
         <div className="flex flex-row items-center justify-start gap-[16px]">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
+          <a href="https://www.linkedin.com/in/hiranjithem" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
             <FaLinkedinIn size={18} />
           </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
+          <a href="https://github.com/Hiranjith" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
             <FaGithub size={18} />
           </a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
+          <a href="https://x.com/hiranjithem?s=11" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
             <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
+          </a>
+          <a href="https://www.instagram.com/hiranjith_?stkn=dmN2N2o5OThvZnBm&utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-[40px] h-[40px] rounded-xl bg-[#09111F] flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:bg-[#00D9A5]/10 transition-colors border border-[#18283D]">
+            <FaInstagram size={18} />
           </a>
         </div>
       </div>

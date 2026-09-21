@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Experience = () => {
   return (
-    <div className="w-full text-[#F5F7FA] font-sans pb-10">
+    <div className="w-full text-[#F5F7FA] font-sans">
       {/* Hero Section */}
       <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-stretch">
         
@@ -106,6 +107,7 @@ const Experience = () => {
               src="/Banner/experience-banner.png" 
               alt="Experience Illustration" 
               className="w-full h-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_15px_rgba(0,217,165,0.1)]"
+              style={{ WebkitMaskImage: 'radial-gradient(circle, black 60%, transparent 100%)', maskImage: 'radial-gradient(circle, black 60%, transparent 100%)' }}
             />
           </div>
 
@@ -333,12 +335,12 @@ const Experience = () => {
             </p>
           </div>
         </div>
-        <button className="whitespace-nowrap px-6 py-3 bg-transparent border border-[#00D9A5] text-[#00D9A5] hover:bg-[#00D9A5] hover:text-[#050A14] rounded-lg font-[600] transition-all flex items-center gap-2 group w-full sm:w-auto justify-center">
+        <Link to="/contact#message-form" className="whitespace-nowrap px-6 py-3 bg-transparent border border-[#00D9A5] text-[#00D9A5] hover:bg-[#00D9A5] hover:text-[#050A14] rounded-lg font-[600] transition-all flex items-center gap-2 group w-full sm:w-auto justify-center">
           Let's Connect
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-[16px] h-[16px] group-hover:translate-x-1 transition-transform">
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
-        </button>
+        </Link>
       </div>
 
     </div>

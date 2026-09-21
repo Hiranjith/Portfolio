@@ -1,4 +1,5 @@
 import { useState, cloneElement } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 // Icons
 import { FiMonitor, FiSettings, FiDatabase, FiTool, FiStar, FiZap } from 'react-icons/fi';
@@ -208,9 +209,9 @@ function Skills() {
             </p>
           </div>
         </div>
-        <button className="shrink-0 px-6 py-3 rounded-full bg-transparent border border-[#00D9A5] text-[#00D9A5] font-medium hover:bg-[#00D9A5] hover:text-[#0A0F16] transition-colors duration-300 flex items-center gap-2">
+        <Link to="/contact#message-form" className="shrink-0 px-6 py-3 rounded-full bg-transparent border border-[#00D9A5] text-[#00D9A5] font-medium hover:bg-[#00D9A5] hover:text-[#0A0F16] transition-colors duration-300 flex items-center gap-2">
           Let's Connect <span className="text-lg">→</span>
-        </button>
+        </Link>
       </div>
     </div>
   );

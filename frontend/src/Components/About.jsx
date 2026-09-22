@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MdOutlineWork, MdLocationOn } from 'react-icons/md';
 import { FiCode, FiTarget, FiUsers } from 'react-icons/fi';
-import { FaUserAlt, FaRocket, FaGraduationCap, FaHeart, FaGamepad, FaFilm, FaBook, FaPlane, FaMapMarkedAlt, FaChevronDown, FaChevronUp, FaLightbulb, FaQuoteLeft, FaCompass, FaChartBar } from 'react-icons/fa';
+import { FaUserAlt, FaRocket, FaGraduationCap, FaHeart, FaGamepad, FaFilm, FaBook, FaPlane, FaMapMarkedAlt, FaChevronDown, FaChevronUp, FaLightbulb, FaQuoteLeft, FaCompass, FaChartBar, FaTimes } from 'react-icons/fa';
 import { BiFootball } from 'react-icons/bi';
 
 function About() {
-  const [storyExpanded, setStoryExpanded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div id="about" className="space-y-[40px] md:space-y-[48px] pt-[10px] md:pt-[40px] pb-0">
@@ -21,7 +21,7 @@ function About() {
           </h1>
           
           <p className="text-[#94A3B8] text-[15px] md:text-[16px] leading-relaxed max-w-[500px]">
-            I'm Hiranjith E M, a MERN stack developer passionate about building modern web applications and solving real-world problems. I enjoy turning ideas into useful products that create impact.
+            I build full-stack web applications that turn ideas into practical, scalable digital products. With a strong focus on the MERN stack, I work across the frontend, backend, and database to create solutions tailored to real business needs.
           </p>
         </div>
 
@@ -145,51 +145,14 @@ function About() {
             My Story <span className="w-2 h-2 rounded-full bg-[#00D9A5]"></span>
           </h2>
           <div className="space-y-[16px] text-[#A0B3C6] text-[14px] md:text-[15px] leading-[1.6]">
-            <p>
-              My journey into tech started during my engineering days when I developed a strong interest in problem solving and building things. Over time, I found my passion in web development, especially the MERN stack.
-            </p>
-            <AnimatePresence initial={false}>
-              {(storyExpanded || typeof window !== 'undefined' && window.innerWidth >= 768) ? (
-                <motion.div
-                  key="content"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden md:!h-auto md:!opacity-100"
-                >
-                  <p className="mt-[16px]">
-                    I enjoy working on real-world projects, learning new tools and continuously improving my skills. I believe in writing clean code, building scalable solutions and creating products that are simple, effective and user-friendly.
-                  </p>
-                  {storyExpanded && (
-                    <button 
-                      onClick={() => setStoryExpanded(false)}
-                      className="flex items-center gap-1 text-[#00D9A5] font-semibold text-[14px] mt-[12px] md:hidden"
-                    >
-                      Read Less <FaChevronUp size={12} />
-                    </button>
-                  )}
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
-            
-            {/* Mobile Read More */}
-            <AnimatePresence>
-              {!storyExpanded && (
-                <motion.div 
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, height: 0, marginBottom: 0 }}
-                  className="md:hidden"
-                >
-                  <button 
-                    onClick={() => setStoryExpanded(true)}
-                    className="flex items-center gap-1 text-[#00D9A5] font-semibold text-[14px]"
-                  >
-                    Read More <FaChevronDown size={12} />
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <p>My journey into technology wasn’t something I planned from the beginning.</p>
+            <p>I graduated with a B.Tech in Metallurgical and Materials Engineering from NIT Warangal. During the COVID-19 pandemic, when internships and opportunities that required being on-site came to a halt, I found myself with more time at home. That was when I started experimenting with programming and building small web applications.</p>
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="flex items-center gap-1 text-[#00D9A5] font-semibold text-[14px] hover:text-[#00B98B] transition-colors"
+            >
+              Read More <FaChevronDown size={12} className="mt-[2px]" />
+            </button>
           </div>
         </div>
 
@@ -340,6 +303,68 @@ function About() {
         </div>
 
       </div>
+
+      {/* Story Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-[20px] md:p-[40px]">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-[#050A14]/80 backdrop-blur-sm cursor-pointer"
+            ></motion.div>
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              className="relative w-full max-w-[800px] max-h-[90vh] bg-[#09111F] border border-[#18283D] rounded-2xl shadow-2xl overflow-hidden flex flex-col z-10"
+            >
+              {/* Fixed Header */}
+              <div className="flex items-center justify-between px-[24px] py-[20px] md:px-[40px] md:py-[32px] border-b border-[#18283D] bg-[#09111F] shrink-0">
+                <h2 className="text-[24px] md:text-[32px] font-[800] text-[#F5F7FA]">My Story</h2>
+                
+                {/* Close Button */}
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-[32px] h-[32px] bg-[#050A14] border border-[#18283D] rounded-full flex items-center justify-center text-[#A0B3C6] hover:text-[#00D9A5] hover:border-[#00D9A5]/50 transition-colors shrink-0"
+                >
+                  <FaTimes size={14} />
+                </button>
+              </div>
+              
+              {/* Scrollable Content */}
+              <div className="overflow-y-auto scrollbar-none px-[24px] py-[24px] md:px-[40px] md:py-[32px] space-y-[16px] text-[#A0B3C6] text-[15px] md:text-[16px] leading-[1.8]">
+                <p>My journey into technology wasn’t something I planned from the beginning.</p>
+                
+                <p>I graduated with a B.Tech in Metallurgical and Materials Engineering from NIT Warangal. During the COVID-19 pandemic, when internships and opportunities that required being on-site came to a halt, I found myself with more time at home. That was when I started experimenting with programming and building small web applications.</p>
+                
+                <p>What began as curiosity gradually became something more. I started enjoying the process of solving problems, building things from scratch, and turning ideas into working applications. Over time, I became more serious about web development and decided to pursue it as my profession.</p>
+                
+                <p>In 2022, I joined Servion Global Solutions as a Software Engineer, where I spent almost three years working as a developer and gaining experience building real-world software. That experience helped me strengthen not only my technical skills, but also my understanding of writing maintainable code, working with teams, solving practical problems, and delivering reliable solutions.</p>
+                
+                <p>After leaving Servion, I took a six-month break to travel and explore different parts of the world. It gave me an opportunity to step away from the usual routine, experience new places, and return with a clearer perspective on what I wanted to do next.</p>
+                
+                <p>In the second half of 2025, I returned to the tech world and began looking for new opportunities. At the same time, I started taking up freelance projects, working directly with clients to design and develop applications tailored to their requirements.</p>
+                
+                <p>Today, I enjoy working on real-world products, learning new technologies, solving challenging problems, and continuously improving my craft. My focus is on building solutions that are clean, scalable, responsive, and genuinely useful to the people who use them.</p>
+                
+                <h3 className="text-[#F5F7FA] text-[18px] md:text-[20px] font-[750] mt-[32px] mb-[16px]">What I'm Doing Now</h3>
+                
+                <p>I'm currently open to freelance projects and full-time opportunities.</p>
+                
+                <p>If you have an idea that needs to be turned into a working product, need a custom web application, or are looking for a developer to build an application around your specific requirements, feel free to reach out.</p>
+                
+                <p>I'm also open to joining a team or company where I can contribute, learn, and build meaningful products with the right people.</p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

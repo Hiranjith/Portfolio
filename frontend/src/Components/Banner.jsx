@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa'
 import { MdOutlineWork, MdLocationOn } from 'react-icons/md'
 import { FiCode, FiArrowRight } from 'react-icons/fi'
@@ -9,7 +10,7 @@ function Banner() {
       
       {/* Left Column */}
       <div className="flex-1 text-left z-10 w-full">
-        <h4 className="text-[#00D9A5] text-[12px] font-bold tracking-[0.2em] uppercase mb-4">MERN STACK DEVELOPER</h4>
+        <h4 className="text-[#00D9A5] text-[12px] font-bold tracking-[0.2em] uppercase mb-4">FREELANCE FULL-STACK DEVELOPER</h4>
         <h1 className="text-4xl md:text-[48px] font-[800] leading-[1.1] mb-5 tracking-tight text-white">
           Hiranjith <span className="text-[#00D9A5]">E M</span>
         </h1>
@@ -19,13 +20,13 @@ function Banner() {
         </p>
         
         {/* Buttons */}
-        <div className="flex flex-row items-center justify-start gap-[12px] md:gap-[16px] w-full">
-          <button className="flex-1 md:flex-none justify-center bg-[#00D9A5] text-[#050A14] px-[12px] md:px-[24px] py-[8px] md:py-[12px] text-[14px] md:text-[16px] rounded-xl font-[600] flex items-center gap-2 hover:bg-[#00B98D] transition-colors">
+        <div className="flex flex-row items-center justify-start gap-[12px] md:gap-[16px] w-full mb-8">
+          <Link to="/projects" className="flex-1 md:flex-none justify-center bg-[#00D9A5] text-[#050A14] px-[12px] md:px-[24px] py-[8px] md:py-[12px] text-[14px] md:text-[16px] rounded-xl font-[600] flex items-center gap-2 hover:bg-[#00B98D] transition-colors">
             View My Work <FiArrowRight size={16} />
-          </button>
-          <button className="flex-1 md:flex-none justify-center border border-[#18283D] text-[#A0B3C6] px-[12px] md:px-[24px] py-[8px] md:py-[12px] text-[14px] md:text-[16px] rounded-xl font-[600] hover:bg-[#18283D] transition-colors">
+          </Link>
+          <a href="#contact" className="flex-1 md:flex-none justify-center border border-[#18283D] text-[#A0B3C6] px-[12px] md:px-[24px] py-[8px] md:py-[12px] text-[14px] md:text-[16px] rounded-xl font-[600] flex items-center hover:bg-[#18283D] transition-colors">
             Contact Me
-          </button>
+          </a>
         </div>
 
         {/* Socials */}

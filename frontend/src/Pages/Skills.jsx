@@ -2,14 +2,14 @@ import { useState, cloneElement } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 // Icons
-import { FiMonitor, FiSettings, FiDatabase, FiTool, FiStar, FiZap } from 'react-icons/fi';
+import { FiMonitor, FiSettings, FiDatabase, FiTool, FiStar, FiZap, FiUsers, FiMessageCircle, FiCheckCircle, FiList, FiEye, FiCloud, FiMessageSquare, FiCpu, FiTerminal, FiCode, FiHexagon } from 'react-icons/fi';
 import { 
   SiReact, SiJavascript, SiTailwindcss, SiHtml5, SiCss, SiRedux,
   SiNodedotjs, SiExpress, SiMongodb, SiGit, SiGithub, SiDocker,
-  SiVercel, SiRender, SiPostman, SiFigma
+  SiVercel, SiRender, SiPostman, SiFigma, SiRedis
 } from 'react-icons/si';
 import { TbApi, TbPlugConnected, TbBrandVscode } from 'react-icons/tb';
-import { FaDatabase, FaAws } from 'react-icons/fa';
+import { FaDatabase, FaAws, FaMicrosoft, FaGoogle } from 'react-icons/fa';
 
 const skillCategories = [
   {
@@ -46,6 +46,7 @@ const skillCategories = [
     skills: [
       { name: "MongoDB", icon: <SiMongodb className="text-[#47A248] text-xl" />, percentage: 85 },
       { name: "SQL", icon: <FaDatabase className="text-[#00758F] text-xl" />, percentage: 70 },
+      { name: "Redis", icon: <SiRedis className="text-[#DC382D] text-xl" />, percentage: 75 },
     ]
   },
   {
@@ -63,6 +64,30 @@ const skillCategories = [
     ]
   },
   {
+    id: "Cloud Technologies",
+    title: "Cloud Technologies",
+    subtitle: "Cloud platforms and conversational AI",
+    icon: <FiCloud className="text-[#00D9A5] text-xl" />,
+    skills: [
+      { name: "Genesys Cloud", icon: <FiCloud className="text-[#00D9A5] text-xl" />, percentage: 80 },
+      { name: "Microsoft Azure", icon: <FaMicrosoft className="text-[#00A4EF] text-xl" />, percentage: 75 },
+      { name: "Google Dialog Flow", icon: <FaGoogle className="text-[#4285F4] text-xl" />, percentage: 80 },
+      { name: "Omilia Cloud", icon: <FiMessageSquare className="text-[#00D9A5] text-xl" />, percentage: 75 },
+    ]
+  },
+  {
+    id: "AI Tools",
+    title: "AI Tools",
+    subtitle: "Artificial Intelligence & Coding Assistants",
+    icon: <FiCpu className="text-[#00D9A5] text-xl" />,
+    skills: [
+      { name: "Claude", icon: <FiHexagon className="text-[#00D9A5] text-xl" />, percentage: 85 },
+      { name: "Antigravity", icon: <FiZap className="text-[#00D9A5] text-xl" />, percentage: 90 },
+      { name: "Open Code", icon: <FiCode className="text-[#00D9A5] text-xl" />, percentage: 80 },
+      { name: "ChatGPT", icon: <FiMessageSquare className="text-[#10A37F] text-xl" />, percentage: 90 },
+    ]
+  },
+  {
     id: "Other",
     title: "Other Skills",
     subtitle: "Additional tools and libraries",
@@ -72,10 +97,22 @@ const skillCategories = [
       { name: "VS Code", icon: <TbBrandVscode className="text-[#007ACC] text-xl" />, percentage: 85 },
       { name: "Figma", icon: <SiFigma className="text-[#F24E1E] text-xl" />, percentage: 65 },
     ]
+  },
+  {
+    id: "Soft Skills",
+    title: "Soft Skills",
+    subtitle: "Interpersonal and professional attributes",
+    icon: <FiUsers className="text-[#00D9A5] text-xl" />,
+    skills: [
+      { name: "Excellent verbal communication", icon: <FiMessageCircle className="text-[#00D9A5] text-xl" />, percentage: 95 },
+      { name: "Problem Solving Skills", icon: <FiCheckCircle className="text-[#00D9A5] text-xl" />, percentage: 90 },
+      { name: "Organizational Skills", icon: <FiList className="text-[#00D9A5] text-xl" />, percentage: 90 },
+      { name: "Attention to Detail", icon: <FiEye className="text-[#00D9A5] text-xl" />, percentage: 95 },
+    ]
   }
 ];
 
-const filters = ["All", "Frontend", "Backend", "Database", "Tools & DevOps", "Other"];
+const filters = ["All", "Frontend", "Backend", "Database", "Tools & DevOps", "Cloud Technologies", "AI Tools", "Other", "Soft Skills"];
 
 function Skills() {
   const [activeFilter, setActiveFilter] = useState("All");

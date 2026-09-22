@@ -68,11 +68,11 @@ function MainBody() {
             </div>
             <h2 className="text-[20px] lg:text-[22px] font-[750] text-[#F5F7FA] tracking-tight">Skills</h2>
           </div>
-          <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+          <Link to="/skills" className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
             <span className="hidden lg:inline">View All Skills</span>
             <span className="lg:hidden">View All</span>
             <FiArrowRight />
-          </button>
+          </Link>
         </div>
 
         {loadingSkills ? (

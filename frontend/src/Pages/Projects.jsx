@@ -213,9 +213,9 @@ function Projects() {
                   <div className="flex items-center gap-3 mb-[12px]">
                     {(project.logo || project.title?.toLowerCase().includes('fitness')) && (
                       <img 
-                        src={project.logo || '/projects/ff logo.png'} 
+                        src={project.title?.toLowerCase().includes('fitness') ? '/projects/ff logo.png?v=2' : project.logo} 
                         alt={`${project.title} logo`}
-                        className="w-[42px] h-[42px] rounded-[10px] object-cover bg-white"
+                        className={`w-[42px] h-[42px] rounded-[10px] ${project.title?.toLowerCase().includes('fitness') ? 'object-contain bg-[#09111F]' : 'object-cover bg-white'}`}
                       />
                     )}
                     <h3 className="text-[20px] font-[700] text-[#F5F7FA] tracking-tight leading-tight line-clamp-2">

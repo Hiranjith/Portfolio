@@ -208,9 +208,19 @@ function MainBody() {
 
                       {/* Logo and Title+Desc */}
                       <div className="flex gap-[12px] items-start w-full">
-                        {(project.logo || project.title?.toLowerCase().includes('fitness')) && (
-                          <div className={`h-[52px] w-[52px] rounded-[10px] overflow-hidden shrink-0 border border-[#142A22] ${project.title?.toLowerCase().includes('fitness') ? 'bg-transparent' : 'bg-white'}`}>
-                            <img src={project.title?.toLowerCase().includes('fitness') ? '/projects/ff logo.png?v=2' : project.logo} alt="logo" className="w-full h-full object-contain" />
+                        {(project.logo || project.title?.toLowerCase().includes('fitness') || project.title?.toLowerCase().includes('bharat')) && (
+                          <div className={`h-[52px] w-[52px] rounded-[10px] overflow-hidden shrink-0 border border-[#142A22] ${
+                            (project.title?.toLowerCase().includes('fitness') || project.title?.toLowerCase().includes('bharat')) 
+                              ? 'bg-transparent' 
+                              : 'bg-white'
+                          }`}>
+                            <img src={
+                              project.title?.toLowerCase().includes('fitness') 
+                                ? '/projects/ff logo.png?v=2' 
+                                : project.title?.toLowerCase().includes('bharat')
+                                  ? '/projects/BM-logo.png'
+                                  : project.logo
+                            } alt="logo" className="w-full h-full object-contain" />
                           </div>
                         )}
                         <div className="flex-1 min-w-0"> {/* min-w-0 prevents horizontal overflow crop */}
@@ -273,9 +283,19 @@ function MainBody() {
                       )}
 
                       <div className="flex items-center gap-3 mb-[16px]">
-                        {(project.logo || project.title?.toLowerCase().includes('fitness')) && (
-                          <div className={`h-[36px] w-[36px] rounded-[8px] overflow-hidden shrink-0 ${project.title?.toLowerCase().includes('fitness') ? 'bg-transparent' : 'bg-white'}`}>
-                            <img src={project.title?.toLowerCase().includes('fitness') ? '/projects/ff logo.png?v=2' : project.logo} alt="logo" className="w-full h-full object-contain" />
+                        {(project.logo || project.title?.toLowerCase().includes('fitness') || project.title?.toLowerCase().includes('bharat')) && (
+                          <div className={`h-[36px] w-[36px] rounded-[8px] overflow-hidden shrink-0 ${
+                            (project.title?.toLowerCase().includes('fitness') || project.title?.toLowerCase().includes('bharat')) 
+                              ? 'bg-transparent' 
+                              : 'bg-white'
+                          }`}>
+                            <img src={
+                              project.title?.toLowerCase().includes('fitness') 
+                                ? '/projects/ff logo.png?v=2' 
+                                : project.title?.toLowerCase().includes('bharat')
+                                  ? '/projects/BM-logo.png'
+                                  : project.logo
+                            } alt="logo" className="w-full h-full object-contain" />
                           </div>
                         )}
                         <h3 className="text-[16px] font-[700] text-[#F5F7FA] tracking-tight leading-tight line-clamp-2">

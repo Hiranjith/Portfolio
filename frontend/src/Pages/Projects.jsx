@@ -211,11 +211,21 @@ function Projects() {
                   </div>
 
                   <div className="flex items-center gap-3 mb-[12px]">
-                    {(project.logo || project.title?.toLowerCase().includes('fitness')) && (
+                    {(project.logo || project.title?.toLowerCase().includes('fitness') || project.title?.toLowerCase().includes('bharat')) && (
                       <img 
-                        src={project.title?.toLowerCase().includes('fitness') ? '/projects/ff logo.png?v=2' : project.logo} 
+                        src={
+                          project.title?.toLowerCase().includes('fitness') 
+                            ? '/projects/ff logo.png?v=2' 
+                            : project.title?.toLowerCase().includes('bharat')
+                              ? '/projects/BM-logo.png'
+                              : project.logo
+                        } 
                         alt={`${project.title} logo`}
-                        className={`w-[42px] h-[42px] rounded-[10px] ${project.title?.toLowerCase().includes('fitness') ? 'object-contain bg-[#09111F]' : 'object-cover bg-white'}`}
+                        className={`w-[42px] h-[42px] rounded-[10px] ${
+                          (project.title?.toLowerCase().includes('fitness') || project.title?.toLowerCase().includes('bharat')) 
+                            ? 'object-contain bg-transparent' 
+                            : 'object-cover bg-white'
+                        }`}
                       />
                     )}
                     <h3 className="text-[20px] font-[700] text-[#F5F7FA] tracking-tight leading-tight line-clamp-2">

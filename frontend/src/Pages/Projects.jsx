@@ -295,10 +295,10 @@ function Projects() {
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
               transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full h-full lg:h-auto lg:max-h-[90vh] lg:max-w-4xl bg-[#050A14] lg:bg-[#030812] overflow-y-auto scrollbar-none lg:rounded-[24px] lg:border lg:border-[#18283D] flex flex-col relative shadow-2xl"
+              className="w-full h-full lg:h-auto lg:max-h-[90vh] lg:max-w-4xl bg-[#050A14] lg:bg-[#030812] overflow-hidden lg:rounded-[24px] lg:border lg:border-[#18283D] flex flex-col relative shadow-2xl"
             >
               {/* Close Button */}
-              <div className="absolute z-10 right-4 top-4 lg:right-6 lg:top-6">
+              <div className="absolute z-[100] right-4 top-4 lg:right-6 lg:top-6">
                 <button 
                   onClick={() => setActiveProject(null)}
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-[#050A14]/80 text-[#8FA7C4] hover:text-white hover:bg-rose-500/80 transition-all backdrop-blur-md border border-[#18283D]/50"
@@ -310,7 +310,7 @@ function Projects() {
               </div>
 
               {/* Modal Content */}
-              <div className="flex flex-col pb-10">
+              <div className="flex flex-col pb-10 overflow-y-auto scrollbar-none h-full">
                 {/* Header Image */}
                 <div className="w-full h-[250px] lg:h-[350px] relative border-b border-[#18283D]">
                   <img 

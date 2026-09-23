@@ -6,6 +6,9 @@ const formSchema = mongoose.Schema(
         email : {type : String, required : true},
         number : {type : Number, required : true},
         message : {type : String}
+    },
+    {
+        timestamps: true
     }
 )
 

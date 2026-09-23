@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SkillManager from '../Components/SkillManager'
 import ProjectManager from '../Components/ProjectManager'
+import MessageManager from '../Components/MessageManager'
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('projects')
@@ -55,10 +56,25 @@ function AdminDashboard() {
           </svg>
           Skills
         </button>
+        <button
+          onClick={() => setActiveTab('messages')}
+          className={`flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
+            activeTab === 'messages'
+              ? 'bg-white dark:bg-[#1a233a] text-blue-600 dark:text-blue-400 shadow-sm border border-slate-200/50 dark:border-slate-700/50'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-white/5'
+          }`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+          </svg>
+          Messages
+        </button>
       </div>
 
       <div className="mt-8 transition-all duration-500">
-        {activeTab === 'projects' ? <ProjectManager /> : <SkillManager />}
+        {activeTab === 'projects' && <ProjectManager />}
+        {activeTab === 'skills' && <SkillManager />}
+        {activeTab === 'messages' && <MessageManager />}
       </div>
     </div>
   )

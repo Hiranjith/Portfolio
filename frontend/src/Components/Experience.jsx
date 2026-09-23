@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { MdOutlineWork } from 'react-icons/md'
 import { FiArrowRight } from 'react-icons/fi'
 import { IoLocationOutline } from 'react-icons/io5'
@@ -6,12 +7,24 @@ import { IoLocationOutline } from 'react-icons/io5'
 function Experience() {
   const experiences = [
     {
+      id: 2,
+      durationStart: '2025',
+      durationEnd: 'Present',
+      role: 'Freelance Full-Stack Developer',
+      company: 'Freelance',
+      location: 'Remote / Global',
+      link: '/experience#freelance',
+      description: 'Designed and developed scalable MERN-stack web applications and REST APIs for clients, leveraging AI tools to accelerate delivery.',
+      skills: ['React', 'Node.js', 'REST APIs', 'SQL', 'Supabase', 'Generative AI']
+    },
+    {
       id: 1,
       durationStart: '2022',
       durationEnd: '2025',
       role: 'Software Engineer',
       company: 'Servion Global Solutions',
       location: 'Bengaluru, India',
+      link: '/experience#servion',
       description: 'Worked on real-world projects using React. Collaborated with the team to build scalable web applications.',
       skills: ['React', 'Node.js', 'MongoDB', 'Express', 'AWS']
     }
@@ -28,11 +41,11 @@ function Experience() {
             Experience <div className="w-[6px] h-[6px] bg-[#00D9A5] rounded-full mt-1"></div>
           </h2>
         </div>
-        <button className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
+        <Link to="/experience" className="flex items-center gap-2 text-[#00D9A5] font-semibold text-[13px] lg:text-[14px] hover:text-[#00B98B] transition-colors">
           <span className="hidden lg:inline">View All Experience</span>
           <span className="lg:hidden">View All</span>
           <FiArrowRight />
-        </button>
+        </Link>
       </div>
 
       <p className="text-[14px] lg:text-[15px] text-[#8FA7C4]">
@@ -86,6 +99,13 @@ function Experience() {
                     ))}
                   </div>
                 )}
+
+                <div className="mt-6 pt-4 border-t border-[#18283D] flex justify-end">
+                  <Link to={exp.link} className="flex items-center gap-2 text-[13px] text-[#00D9A5] hover:text-[#00B98B] font-semibold transition-colors group">
+                    View Details
+                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
